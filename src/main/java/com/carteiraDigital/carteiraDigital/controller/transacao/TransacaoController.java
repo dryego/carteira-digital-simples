@@ -5,6 +5,8 @@ import com.carteiraDigital.carteiraDigital.model.transacao.Transacao;
 import com.carteiraDigital.carteiraDigital.repository.transacao.TransacaoRepository;
 import com.carteiraDigital.carteiraDigital.service.transacao.TransacaoService;
 import com.carteiraDigital.carteiraDigital.util.Resposta;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/transacao")
+@Tag(name = "Criar uma nova transação.", description = "Cadastra uma nova transação")
 public class TransacaoController {
 
     @Autowired
     TransacaoService transacaoService;
 
+    @Operation(summary = "Cadastra uma nova transação.", description = "Cadastro de transação. OBS: só uma pessoa com conta juridica pode realizar transferencias.")
     @PostMapping("/cadastro")
     public ResponseEntity<Object> postCadastroTransacao(@RequestBody TransacaoDTO transacaoDTO){
         try {
